@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 10-02-2022 a las 10:20:02
+-- Tiempo de generación: 11-04-2022 a las 09:24:31
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 7.3.8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `miv-mast`
+-- Base de datos: `agmen`
 --
 
 -- --------------------------------------------------------
@@ -33,26 +33,6 @@ CREATE TABLE `analytics` (
   `type` varchar(255) NOT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `courses`
---
-
-CREATE TABLE `courses` (
-  `id_course` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `courses`
---
-
-INSERT INTO `courses` (`id_course`, `name`, `status`, `created`) VALUES
-(1, 'Evento Online Radiesse', 1, '2022-02-10 01:20:34');
 
 -- --------------------------------------------------------
 
@@ -107,20 +87,6 @@ CREATE TABLE `tanger_live` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tracking`
---
-
-CREATE TABLE `tracking` (
-  `id_tracking` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `current` float NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -128,12 +94,17 @@ CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
   `fullname` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `specialty` varchar(255) DEFAULT NULL,
-  `cedula` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1',
   `passdefault` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_user`, `fullname`, `username`, `password`, `status`, `passdefault`) VALUES
+(1, 'edgar ramirez toala', 'edgar@tanger-inc.com', '$2a$10$xhbgtPkaJ4W8eqQ1Qq3xHOivi9NlGox33sDT6qQtrIZKvkIjzxL8e', 1, '$2a$10$9.gwY.WKGPSYvBbf1wAKWeULgyj8b5e0zALBoe.QtNlm7SKoTsby6');
 
 -- --------------------------------------------------------
 
@@ -149,6 +120,13 @@ CREATE TABLE `voto_pregunta` (
   `breakout` int(11) DEFAULT '0',
   `presentacion` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Volcado de datos para la tabla `voto_pregunta`
+--
+
+INSERT INTO `voto_pregunta` (`idvoto_pregunta`, `nombre`, `tipo`, `estado`, `breakout`, `presentacion`) VALUES
+(1, 'Quien ganara el mundial', 'votacion', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -179,6 +157,47 @@ CREATE TABLE `voto_respuesta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `voto_respuesta`
+--
+
+INSERT INTO `voto_respuesta` (`idvoto_respuesta`, `idvoto_pregunta`, `opcion`, `respuesta`) VALUES
+(1, 1, 'México', NULL),
+(2, 1, 'Argentina', NULL),
+(3, 1, 'Francia', NULL),
+(4, 1, 'Inglaterra', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wordcloud`
+--
+
+CREATE TABLE `wordcloud` (
+  `id_wordcloud` int(11) NOT NULL,
+  `pregunta` varchar(500) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `wordcloud`
+--
+
+INSERT INTO `wordcloud` (`id_wordcloud`, `pregunta`, `status`) VALUES
+(1, '¿Quién ganará el mundial ?', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `words`
+--
+
+CREATE TABLE `words` (
+  `id_word` int(11) NOT NULL,
+  `words` varchar(255) NOT NULL,
+  `id_wordcloud` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -187,12 +206,6 @@ CREATE TABLE `voto_respuesta` (
 --
 ALTER TABLE `analytics`
   ADD PRIMARY KEY (`id_analytic`);
-
---
--- Indices de la tabla `courses`
---
-ALTER TABLE `courses`
-  ADD PRIMARY KEY (`id_course`);
 
 --
 -- Indices de la tabla `sessions`
@@ -211,12 +224,6 @@ ALTER TABLE `surveys`
 --
 ALTER TABLE `tanger_live`
   ADD PRIMARY KEY (`idtanger_live`);
-
---
--- Indices de la tabla `tracking`
---
-ALTER TABLE `tracking`
-  ADD PRIMARY KEY (`id_tracking`);
 
 --
 -- Indices de la tabla `users`
@@ -244,6 +251,18 @@ ALTER TABLE `voto_respuesta`
   ADD KEY `fk_voto_respuesta_voto_pregunta_idx` (`idvoto_pregunta`);
 
 --
+-- Indices de la tabla `wordcloud`
+--
+ALTER TABLE `wordcloud`
+  ADD PRIMARY KEY (`id_wordcloud`);
+
+--
+-- Indices de la tabla `words`
+--
+ALTER TABLE `words`
+  ADD PRIMARY KEY (`id_word`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -252,12 +271,6 @@ ALTER TABLE `voto_respuesta`
 --
 ALTER TABLE `analytics`
   MODIFY `id_analytic` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `courses`
---
-ALTER TABLE `courses`
-  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `surveys`
@@ -272,28 +285,34 @@ ALTER TABLE `tanger_live`
   MODIFY `idtanger_live` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tracking`
---
-ALTER TABLE `tracking`
-  MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `voto_pregunta`
 --
 ALTER TABLE `voto_pregunta`
-  MODIFY `idvoto_pregunta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idvoto_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `voto_respuesta`
 --
 ALTER TABLE `voto_respuesta`
-  MODIFY `idvoto_respuesta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idvoto_respuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `wordcloud`
+--
+ALTER TABLE `wordcloud`
+  MODIFY `id_wordcloud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `words`
+--
+ALTER TABLE `words`
+  MODIFY `id_word` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
