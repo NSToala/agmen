@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.:: Radiesse Corporal ::.</title>
+    {{!-- Boostrap 4 --}}
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <!--Import materialize.css-->    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    {{!-- Styles --}}
+    <link rel="stylesheet" type="text/css" href="/css/styles.minify1k.css">
+    <link rel="stylesheet" type="text/css" href="/css/register1a.css">
+</head>
+<body>
+    {{> message }}
+    {{{ body }}}
+    
+    {{!-- Scripts --}}
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>    
+    <script>
+        $(document).ready(function() {
+            $('#recovery-form').on('submit', event => {
+                var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                let username = $('#username').val()
+
+                if(username != "") {
+                    if (regex.test(username)) {
+                        console.log("Se envía el comentario")
+                    }else {
+                        event.preventDefault()
+                        M.toast({html: 'Lo sentimos, el correo electrónico no es valido!', classes: 'rounded red darken-4'})	
+                    }
+                }else {
+                    event.preventDefault()
+                    M.toast({html: 'Lo sentimos, el correo electrónico es obligatorio!', classes: 'rounded red darken-4'});
+                }
+            })
+            
+            $('#register-form').on('submit', event => {
+                var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                let registro = {
+                    firstname: $('#firstname').val(),
+                    lastname: $('#lastname').val(),
+                    username: $('#username').val(),
+                    country: ($('#country').val() == null)? "": $('#country').val(),
+                    city: $('#city').val(),
+                    specialty: $('#specialty').val(),
+                    collegiate_number: $('#collegiate_number').val(),
+                    password: $('#password').val(),
+                }
+
+                if(registro.firstname == "" || registro.lastname == "" || registro.username == "" || registro.country == "" || registro.city == "" || registro.specialty == "" || registro.collegiate_number == "" || registro.password == "") {
+                    event.preventDefault()
+                    M.toast({html: 'Lo sentimos, todos los campos son obligatorios!', classes: 'rounded red darken-4'});
+                }
+            })
+
+
+            $('#resetpassword-form').on('submit', event => {
+                var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                let password = $('#password').val(),
+                    cpassword = $('#cpassword').val()
+
+                if(password == "" || cpassword == "") {
+                    event.preventDefault()
+                    M.toast({html: 'Lo sentimos, todos los campos son obligatorios!', classes: 'rounded red darken-4'});
+                }
+            })
+            
+            $('#password').on('change', event => {
+                let password = $('#password').val()
+                console.log(password.length)
+                if(password.length < 6) {
+                    $('#password').val("")
+                    M.toast({html: 'Lo sentimos, la contraseña tiene que tener minimo 6 caracteres!', classes: 'rounded red darken-4'});
+                }
+            })
+
+            $('#cpassword').on('change', event => {
+                let password = $('#password').val(),
+                    cpassword = $('#cpassword').val()
+                if(password != cpassword){
+                    $('#cpassword').val("")
+                    M.toast({html: 'Lo sentimos, las contraseñas no son iguales!', classes: 'rounded red darken-4'});
+                } 
+            })
+        })
+        function minusc(e) {
+            e.value = e.value.toLowerCase();
+        }
+    </script>
+</body>
+</html>

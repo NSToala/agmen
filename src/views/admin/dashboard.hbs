@@ -1,0 +1,39 @@
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+    {{> navigation-admin }}
+    {{> sidebar-admin }}
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-8 offset-md-2 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <form class="forms-sample">
+                  <div class="form-group">
+                    <label>Escribe la notificación</label>
+                    <textarea class="form-control" id="msg-notificacion" rows="4"></textarea>
+                  </div>
+
+                  <button type="button" class="btn btn-outline-primary btn-icon-text notification" id="1">
+                    <i class="ti-arrow-circle-right btn-icon-prepend"></i>
+                    Enviar
+                  </button>
+
+                  <button type="button" class="btn btn-outline-danger btn-icon-text notification" id="0">
+                    <i class="ti-alert btn-icon-prepend"></i>                                                    
+                    Cerrar
+                  </button>
+                  
+                </form>
+              </div>
+            </div>
+          </div>                    
+        </div>      
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->

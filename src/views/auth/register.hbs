@@ -1,0 +1,35 @@
+<div class="overlay hide">
+    <div class="content-loader text-center">
+        <div class="loader3">
+            <span></span>
+            <span></span>
+        </div>
+        <p class="text-loader">Por favor espere un momento...</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto my-5">            
+            <main class="form-signin mt-5">            
+                <div class="form-register">
+                    <form action="/signup" method="POST" id="signin-form">
+                        <input type="text" id="nombre" name="fullname" class="mb-3 input-app"
+                            placeholder="Nombre completo" autocomplete="off" required/>
+
+                        <input type="email" id="username" name="username" class="mb-3 input-app"
+                            placeholder="Correo electronico" autocomplete="off" required/>
+
+                        <input id="password" type="hidden" class="validate" name="password" value="agmen2022">
+
+                        
+                        <button class="w-100 btn-signin" type="submit">Aceptar</button>
+                    </form>
+                    <div class="form-group bold sigup mt-5 acount">
+                        ¿Tienes una cuenta? <a href="/" style="color: #e53e2f">Inicia sesión</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>

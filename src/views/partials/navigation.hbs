@@ -1,0 +1,65 @@
+<nav class="app">
+  <div class="nav-wrapper container-fluid">
+    <a href="/plenaria" class="brand-logo hide-on-large-only">
+      <img src="/img/icons/logo.png" class="logo-plenaria-min">
+    </a>
+    {{#if user}}
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons color-app">menu</i></a>
+    {{/if}}
+    <div class="row hide-on-med-and-down">      
+      <div class="col-2">
+        <a href="/plenaria">
+          <img src="/img/icons/logo.png" class="logo-plenaria" />
+        </a>
+      </div>
+
+      <div class="col-10">
+        <ul class="right hide-on-med-and-down nav-radiesse">
+          {{#if user}}
+            <li class="nav-item">
+              <a class="nav-link nl" href="/schedule">AGENDA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nl" href="/speakers">PONENTES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nl" href="/expert">PREGÚNTALE AL EXPERTO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nl" href="/wordcloud">WORDCLOUD</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nl exit" href="/logout">CERRAR SESIÓN</a>
+            </li>            
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{{#if user}}
+  <ul class="sidenav background-sidenav" id="mobile-demo">
+    <li class="mb-3">
+      <div class="user-view">
+        <div class="background"></div>
+        <img src="/img/icons/logo.png" class="logo-sidenav">
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link sidenav-text" href="/schedule">AGENDA</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link sidenav-text" href="/speakers">PONENTES</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link sidenav-text" href="/expert">PREGÚNTALE AL EXPERTO</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link sidenav-text" href="/wordcloud">WORDCLOUD</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link sidenav-text exit" href="/logout">CERRAR SESIÓN</a>
+    </li>
+  </ul>
+{{/if}}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>.:: AGMEN ::.</title>
+
+    <link rel="shortcut icon" href="/img/favicon2.ico" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+    
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/materialize.min.css">
+    
+    {{!-- Styles --}}
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/styles.minify1s.css">
+  </head>
+  <body>
+    {{> navigation }}
+    {{> message }}
+    {{{ body }}}
+    {{> vote }}
+
+    {{!-- <span class="arrow-up">
+        <i class="material-icons prefix">keyboard_arrow_up</i>
+    </span> --}}
+    <input type="hidden" id="uid" value="{{user.id_user}}">
+    
+    <script type="text/javascript" src="/js/socket.io.js"></script>
+    {{!-- <script src="/socket.io/socket.io.js"></script> --}}
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.js"></script>
+    
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+
+    <script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+
+    <script src="/js/client-production1j.js"></script>
+  </body>
+</html>
