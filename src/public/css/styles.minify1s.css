@@ -490,6 +490,10 @@ body {
   border-radius: 15px;
 }
 
+.available-wordcloud {
+  color: #122b69;
+}
+
 .txt-worcloud {
   font-size: 22px;
   text-align: center !important;

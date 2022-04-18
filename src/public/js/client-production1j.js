@@ -148,7 +148,9 @@ $(document).ready(function() {
 	socket.on('hay wordcloud', data => {
 		if(data.state == '1') {
 			console.log(data)
-			$('#experto').addClass('hide')
+			// $('#experto').addClass('hide')
+			$('.available-wordcloud').addClass('hide');
+			$('.active-wordcloud').removeClass('hide');
 			wordcloud.removeClass('animate__fadeOut hide').addClass('animate__fadeIn')
 			$('.txt-worcloud').text(data.wordcloud[0].pregunta)
 			$('#word-active').val(data.wordcloud[0].id_wordcloud)
@@ -156,7 +158,10 @@ $(document).ready(function() {
 
 			down()
 		}else {
-			$('#experto').removeClass('hide')
+			// $('#experto').removeClass('hide')
+			$('.available-wordcloud').removeClass('hide');
+			$('.active-wordcloud').addClass('hide');
+			$('#word-active').val("");
 			wordcloud.removeClass('animate__fadeIn').addClass('animate__fadeOut')
 			top()
 			setTimeout(() => {
