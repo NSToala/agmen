@@ -6,24 +6,39 @@
 
     $('.save-questions').click(e => {
         e.preventDefault()
-		let array = new Array(),
-		    question = $('#pregunta').val()
+        let array = new Array(),
+            question = $('#pregunta').val()
 
-		if(question != "") {
-			$(".ip-1").each(function() { if($(this).val() != "" ) { array.push($(this).val()) } })	
+        if(question != "") {
+            $(".ip-1").each(function() { if($(this).val() != "" ) { array.push($(this).val()) } })	
 
-	        if( array.length != 0 ) 
-	        	if( array.length >= 2 ) 	        	
-	        		socket.emit('add question', { question: question, answers: array }, data => {
-	        			if(data) {
+            if( array.length != 0 ) 
+                if( array.length >= 2 ) 	        	
+                    socket.emit('add question', { question: question, answers: array }, data => {
+                        if(data) {
                             alert("Su pregunta ha sido agregada con éxito!")
                             location.href = '/admin/votacion'
-	        			}
-			        })
-	        	else
-		        	alert("lo sentimos, debes agregar por lo menos 2 respuestas!")	
-	        else
-	        	alert("lo sentimos, debes agregar respuestas!")
+                        }
+                    })
+                else
+                    alert("lo sentimos, debes agregar por lo menos 2 respuestas!")	
+            else
+                alert("lo sentimos, debes agregar respuestas!")
+        }else 
+            alert("lo sentimos, el campo de pregunta no puede estar vacio!")
+    })
+
+    $('.save-wordcloud').click(e => {
+        e.preventDefault()
+		let question = $('#pregunta-wordcloud').val()
+
+		if(question != "") {
+            socket.emit('add question-wordcloud', { question: question }, data => {
+                if(data) {
+                    alert("Su pregunta ha sido agregada con éxito!")
+                    location.href = '/admin/wordcloud'
+                }
+            })
 		}else 
 			alert("lo sentimos, el campo de pregunta no puede estar vacio!")
 	})

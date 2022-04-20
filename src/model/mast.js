@@ -87,12 +87,14 @@ const shortid = require('shortid'),
     Mast.getVotosById = (id, callback) => connection.query('SELECT idrespuesta, COUNT(idrespuesta) repeticiones FROM voto_respondieron WHERE idvoto_pregunta = ? GROUP BY idrespuesta ORDER BY idrespuesta ASC', id, callback)
 
     Mast.archiveVotacion = (id, callback) => connection.query('UPDATE voto_pregunta SET presentacion = 1 WHERE idvoto_pregunta = ?', id, callback)
-    
+
     //Operacion de upload images
     Mast.getPhotos = (callback) => connection.query('SELECT * FROM moments', callback)
 
     Mast.upload = (data, callback) => connection.query('INSERT INTO moments (path, created) VALUES (?, Now())', data, callback)
 
+    Mast.insertPreguntaWorcloud = (data, callback) => connection.query('INSERT INTO wordcloud ( pregunta ) VALUES (?)', data.question, callback)
+    
     Mast.insertPreguntaVotacion = (data, callback) => {
         connection.query('INSERT INTO voto_pregunta ( nombre ) VALUES (?)', data.question, (err) => {
             if(!err) 

@@ -130,6 +130,15 @@ exports.listen = server => {
             })
         })
 
+        socket.on('add question-wordcloud', function( data, callback ) {
+            mast.insertPreguntaWorcloud(data, err => {
+                if(!err)
+                    callback(true)
+                else
+                    console.log(err) 
+            })
+        })
+
         socket.on("wordcloud", (data, callback) => {
             mast.wordcloud(data, err => {
                 console.log(err)

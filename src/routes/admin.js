@@ -6,5 +6,6 @@ router
     .get('/votacion',(req, res) => res.render('admin/votacion', {layout: 'admin.hbs'}))
     .get('/wordcloud',(req, res) => res.render('admin/wordcloud', {layout: 'admin.hbs'}))
     .get('/preguntas',(req, res) => res.render('admin/preguntas', {layout: 'admin.hbs'}))
+    .get('/preguntas-wordcloud',(req, res) => res.render('admin/preguntas-word', {layout: 'admin.hbs'}))
 
 module.exports = router
