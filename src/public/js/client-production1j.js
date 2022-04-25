@@ -32,15 +32,23 @@ $(document).ready(function() {
 	});
 
 	$('#signin-form').submit((event) => {
+		let folio = $('#folio').val();
+
 		const user = {
 			fullname: $('#nombre').val(),
 			username: $('#username').val()
 		}
 		
-		if(user.fullname === "" || user.username === "") {
-			event.preventDefault()
+		if(folio === 'agmenAcademy') { 
+			if(user.fullname === "" || user.username === "") {
+				event.preventDefault()
+				alertify.set('notifier','position', 'top-right');
+				alertify.notify('Lo sentimos, todos los campos son obligatorios.', 'custom', 122, function(){console.log('dismissed');});
+			}
+		}else {
+			event.preventDefault();
 			alertify.set('notifier','position', 'top-right');
-			alertify.notify('Lo sentimos, todos los campos son obligatorios.', 'custom', 122, function(){console.log('dismissed');});
+			alertify.notify('Lo sentimos, el folio es incorrecto!.', 'custom', 122, function(){console.log('dismissed');});
 		}
 	})
 
